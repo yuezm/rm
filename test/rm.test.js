@@ -1,29 +1,30 @@
 'use strict';
 const fs = require('fs');
-const childProcess = require('child_process');
+const shell = require('shelljs');
 const rm = require('../index');
 
 describe('test rm', () => {
   beforeAll(() => {
-    childProcess.exec('cp -r file test/');
+    shell.cp('-R', 'file/', 'test/');
   });
 
   it('delete dir error should be null ', done => {
-    rm('./test/file', err => {
+    rm('test/file', err => {
+      console.log(err);
       expect(err).toBeNull();
       done();
     });
   });
 
   it('delete dir error should be not null ', done => {
-    rm('./test/file', err => {
+    rm('test/file', err => {
       expect(err).not.toBeNull();
       done();
     });
   });
 
   it('delete has no callback ', () => {
-    rm('./test/file');
+    rm('test/file');
   });
 
   it('delete file error should be null ', done => {
@@ -39,7 +40,7 @@ describe('test rm', () => {
 
 describe('test shrm', () => {
   beforeAll(() => {
-    childProcess.exec('cp -r file test/');
+    shell.cp('-R', 'file/', 'test/');
   });
 
   it('delete dir error should be null ', done => {
@@ -67,6 +68,7 @@ describe('test shrm', () => {
   });
 
   it('delete  has no callback ', () => {
-    rm.shrm('./test/file');
+    shell.cp('-R', 'file/', 'test/');
+    rm.shrm('test/file');
   });
 });

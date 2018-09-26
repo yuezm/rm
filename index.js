@@ -43,5 +43,5 @@ module.exports = (p, callback=function () {}) => {
 };
 
 module.exports.shrm = (path, callback=function () {}) => {
-  callback(shell.rm('-r ', path).stderr);
+  callback(shell.rm('-R', path).stderr);
 };
