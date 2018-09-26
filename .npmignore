@@ -1,0 +1,5 @@
+coverage/
+.idea/
+file/
+node_modules/
+test/

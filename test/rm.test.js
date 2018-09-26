@@ -15,6 +15,17 @@ describe('test rm', () => {
     });
   });
 
+  it('delete dir error should be not null ', done => {
+    rm('./test/file', err => {
+      expect(err).not.toBeNull();
+      done();
+    });
+  });
+
+  it('delete has no callback ', () => {
+    rm('./test/file');
+  });
+
   it('delete file error should be null ', done => {
     const f = fs.writeFileSync('test/test.js', 'hello rm');
     if (!f) {
@@ -46,5 +57,16 @@ describe('test shrm', () => {
         done();
       });
     }
+  });
+
+  it('delete file error should be error ', done => {
+    rm.shrm('test/test.txt', err => {
+      expect(err).not.toBeNull();
+      done();
+    });
+  });
+
+  it('delete  has no callback ', () => {
+    rm.shrm('./test/file');
   });
 });

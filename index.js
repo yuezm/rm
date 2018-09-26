@@ -26,8 +26,12 @@ async function removeDir(p, callback) {
   }
 }
 
-module.exports = (p, callback) => {
+module.exports = (p, callback=function () {}) => {
   fs.stat(p, (err, stats) => {
+    if (err) {
+      callback(err);
+      return;
+    }
     if (stats.isDirectory()) {
       removeDir(p, callback);
     } else {
@@ -38,6 +42,6 @@ module.exports = (p, callback) => {
   })
 };
 
-module.exports.shrm = (path, callback) => {
-  callback(shell.rm('-rf', path).stderr);
+module.exports.shrm = (path, callback=function () {}) => {
+  callback(shell.rm('-r ', path).stderr);
 };
